@@ -61,7 +61,7 @@ Arguments:
             lr, decay = group["lr"], group["weight_decay"]
             ct, beta, eps = group["ct"], group["beta"], group["eps"]
 
-            lamb = lr * math.sqrt(k)
+            lamb = lr * math.sqrt(k + 1)
 
             for p in group['params']:
                 if p.grad is None:
@@ -106,6 +106,7 @@ Arguments:
 
 
                 p.data.addcdiv_(-ct, exp_avg, rms)  # p = p - ct * m / rms
+
 
 
         return loss
